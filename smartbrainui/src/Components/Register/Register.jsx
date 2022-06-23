@@ -10,7 +10,11 @@ const Register = ({ onRouteChange, loadUser }) => {
     const onPasswordChange = (e) => setPassword(e.target.value);
 
     const onSubmit = (e) => {
-        fetch('http://localhost:5000/register', {
+        if (!name || !email || !password) {
+            return alert('Enter Valid Credentials');
+        }
+
+        return fetch('http://localhost:5000/register', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -47,6 +51,7 @@ const Register = ({ onRouteChange, loadUser }) => {
                                 type='text'
                                 name='name'
                                 id='name'
+                                required={true}
                                 onChange={onNameChange}
                             />
                         </div>
@@ -59,6 +64,7 @@ const Register = ({ onRouteChange, loadUser }) => {
                                 type='email'
                                 name='email-address'
                                 id='email-address'
+                                required={true}
                                 onChange={onEmailChange}
                             />
                         </div>
@@ -71,6 +77,7 @@ const Register = ({ onRouteChange, loadUser }) => {
                                 type='password'
                                 name='password'
                                 id='password'
+                                required={true}
                                 onChange={onPasswordChange}
                             />
                         </div>

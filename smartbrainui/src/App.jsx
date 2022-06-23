@@ -31,8 +31,6 @@ const App = () => {
         await loadFull(main);
     };
 
-    
-
     const calculateFaceLocation = (data) => {
         const clarifaiFace = data.outputs[0].data.regions[0].region_info.bounding_box;
         const image = document.getElementById('inputimage');
@@ -55,25 +53,45 @@ const App = () => {
 
     const onButtonSubmit = (e) => {
         setImageUrl(input);
-        app.models
-            .predict('', input)
+        fetch('http://localhost:5000/imageurl', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ input: input })
+        })
+            .then((res) => res.json())
             .then((res) => {
-                fetch('http://localhost:5000/image', {
-                    method: 'PUT',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ id: user.id })
-                })
-                    .then((res) => res.json())
-                    .then((count) => setUser({ ...user, entries: count }));
+                if (res) {
+                    fetch('http://localhost:5000/image', {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ id: user.id })
+                    })
+                        .then((res) => res.json())
+                        .then((count) => setUser({ ...user, entries: count }))
+                        .catch(console.log);
+                }
                 displayFaceBox(calculateFaceLocation(res));
             })
             .catch((err) => console.log(err));
     };
 
     const onRouteChange = (route) => {
-        if (route === 'signin' || route === 'register') {
+        if (route === 'signout') {
+            setUser({
+                id: '',
+                name: '',
+                email: '',
+                entries: 0,
+                joined: ''
+            });
+            setInput('');
+            setBox({});
+            setImageUrl('');
+            setRoute('signin');
             setIsSignedIn(false);
         }
 

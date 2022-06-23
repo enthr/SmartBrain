@@ -9,6 +9,9 @@ lerna-debug.log*
 
 node_modules
 dist
+public/
+/public/
+public
 dist-ssr
 *.local
 
@@ -35,3 +38,6 @@ dist-ssr
 !.yarn/releases
 !.yarn/sdks
 !.yarn/versions
+
+.env
+/.env

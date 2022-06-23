@@ -8,7 +8,11 @@ const Signin = ({ onRouteChange, loadUser }) => {
     const onPasswordChange = (e) => setPassword(e.target.value);
 
     const onSubmit = (e) => {
-        fetch('http://localhost:5000/signin', {
+        if (!email || !password) {
+            return alert('Enter Valid Credentials');
+        }
+
+        return fetch('http://localhost:5000/signin', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -44,6 +48,7 @@ const Signin = ({ onRouteChange, loadUser }) => {
                                 type='email'
                                 name='email-address'
                                 id='email-address'
+                                required={true}
                                 onChange={onEmailChange}
                             />
                         </div>
@@ -56,6 +61,7 @@ const Signin = ({ onRouteChange, loadUser }) => {
                                 type='password'
                                 name='password'
                                 id='password'
+                                required={true}
                                 onChange={onPasswordChange}
                             />
                         </div>

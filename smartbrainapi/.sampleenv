@@ -1,0 +1,9 @@
+PORT=Your Server Port
+PG_HOST=Your DB Host
+PG_PORT=Your DB Port
+PG_USER=Your DB Username
+PG_PASSWORD=Your DB Password
+PG_DB=Your DB Name
+CLARIFAI_PAT=Your API Key
+CLARIFAI_USER_ID=Your User ID
+CLARIFAI_APP_ID=Your App ID
