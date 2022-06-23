@@ -14,7 +14,7 @@ const Register = ({ onRouteChange, loadUser }) => {
             return alert('Enter Valid Credentials');
         }
 
-        return fetch('http://localhost:5000/register', {
+        return fetch(`${import.meta.env.VITE_SERVER_API_URL}/register`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

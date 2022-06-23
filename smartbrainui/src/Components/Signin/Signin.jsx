@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const Signin = ({ onRouteChange, loadUser }) => {
     const [email, setEmail] = useState('');
@@ -12,7 +12,7 @@ const Signin = ({ onRouteChange, loadUser }) => {
             return alert('Enter Valid Credentials');
         }
 
-        return fetch('http://localhost:5000/signin', {
+        return fetch(`${import.meta.env.VITE_SERVER_API_URL}/signin`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

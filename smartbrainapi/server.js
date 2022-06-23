@@ -8,6 +8,7 @@ import { handleProfile } from './controllers/profile.js';
 import { handleApiCall, handleImage } from './controllers/image.js';
 
 const app = express();
+const PORT = process.env.PORT || 5000;
 
 app.disabled('x-powered-by');
 
@@ -20,7 +21,6 @@ app.put('/image', handleImage);
 app.post('/imageurl', handleApiCall);
 app.get('/profile/:id', handleProfile);
 
-const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
     console.log(`Server is Running on Port ${PORT}`);
 });
